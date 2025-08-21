@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="uk"></html>
+<head>
+    <meta charset="UTF-8">
+    <title>Список турнірів</title>
+</head>
+<body>
+    <h1>Всі турніри</h1>
+    <ul>
+        {% for tournament in tournaments %}
+            <li>{{ tournament.name }}</li>
+        {% empty %}
+            <li>Немає турнірів</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Ласкаво просимо на турнір!</h1>
+<p>Це головна сторінка сайту.</p>
+
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th>№</th>
+            <th>Назва турніру</th>
+            <th>Кількість учасників</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for tournament in tournaments %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ tournament.name }}</td>
+                <td>{{ tournament.participants_count }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock content %}
