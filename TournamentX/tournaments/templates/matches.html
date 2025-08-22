@@ -1,0 +1,15 @@
+<h1>Список матчів</h1>
+
+<ul>
+  {% for match in matches.all %}
+    <li>
+      <strong>Турнір:</strong> {{ match.tournament.name }} <br>
+      <strong>Команди:</strong> {{ match.team1.name }} vs {{ match.team2.name }} <br>
+      <strong>Рахунок:</strong> {{ match.score1 }} : {{ match.score2 }} <br>
+      <strong>Дата матчу:</strong> {{ match.match_date|date:"d.m.Y H:i" }}
+    </li>
+    <hr>
+  {% empty %}
+    <li>Поки немає матчів</li>
+  {% endfor %}
+</ul>

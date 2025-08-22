@@ -31,3 +31,21 @@ class Team(models.Model):
 
     def __str__(self):
         return f"Команда: {self.name}"
+
+class Match(models.Model):
+    tournament = models.ForeignKey(
+        "Tournament", on_delete=models.CASCADE, related_name="Tournament"
+    )
+    team1 = models.ForeignKey(
+        "Team", on_delete=models.CASCADE, related_name="team1"
+    )
+    team2 = models.ForeignKey(
+        "Team", on_delete=models.CASCADE, related_name="team2"
+    )
+    score1 = models.IntegerField(default=0)
+    score2 = models.IntegerField(default=0)
+    match_date = models.DateTimeField()
+
+    def __str__(self):
+        return f"Матч: {self.team1.name} vs {self.team2.name} ({self.match_date})"
+    

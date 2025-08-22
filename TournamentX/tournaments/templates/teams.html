@@ -1,0 +1,12 @@
+<h1>Список команд</h1>
+<ul>
+    {% for team in teams %}
+        <li>{{ team.name }} — участники: 
+            {% for member in team.members.all %}
+                {{ member.username }}{% if not forloop.last %}, {% endif %}
+            {% endfor %}
+        </li>
+    {% empty %}
+        <li>Поки немає команд</li>
+    {% endfor %}
+</ul>

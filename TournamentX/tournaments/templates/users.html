@@ -1,0 +1,8 @@
+<h1>Список користувачів</h1>
+<ul>
+    {% for u in users %}
+        <li>{{ u.first_name }} {{ u.last_name }} ({{ u.email }})</li>
+    {% empty %}
+        <li>Пока немає користувачів</li>
+    {% endfor %}
+</ul>

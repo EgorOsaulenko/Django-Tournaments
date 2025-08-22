@@ -63,3 +63,32 @@ class TeamForm(forms.Form):
         widget=forms.Select(attrs={'class': 'form-control'}),
         label='Tournament'
     )
+
+class MatchForm(forms.Form):
+    tournament = forms.ModelChoiceField(
+        queryset=Tournament.objects.all(),
+        widget=forms.Select(attrs={'class': 'form-control'}),
+        label='Tournament'
+    )
+    team1 = forms.ModelChoiceField(
+        queryset=Team.objects.all(),
+        widget=forms.Select(attrs={'class': 'form-control'}),
+        label='Team 1'
+    )
+    team2 = forms.ModelChoiceField(
+        queryset=Team.objects.all(),
+        widget=forms.Select(attrs={'class': 'form-control'}),
+        label='Team 2'
+    )
+    score1 = forms.IntegerField(
+        label='Score Team 1',
+        widget=forms.NumberInput(attrs={'class': 'form-control', 'min': 0})
+    )
+    score2 = forms.IntegerField(
+        label='Score Team 2',
+        widget=forms.NumberInput(attrs={'class': 'form-control', 'min': 0})
+    )
+    match_date = forms.DateTimeField(
+        label='Match Date and Time',
+        widget=forms.DateTimeInput(attrs={'class': 'form-control', 'type': 'datetime-local'})
+    )
