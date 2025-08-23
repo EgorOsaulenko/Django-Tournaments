@@ -1,8 +1,18 @@
 <h1>Список користувачів</h1>
 <ul>
-    {% for u in users %}
-        <li>{{ u.first_name }} {{ u.last_name }} ({{ u.email }})</li>
+    {% for user in users %}
+        <li>
+            {{ user.username }} — {{ user.first_name }} {{ user.last_name }} 
+            ({{ user.email }}) 
+            {% if user.team.all %}
+                Команди: 
+                {% for team in user.team.all %}
+                    {{ team.name }}{% if not forloop.last %}, {% endif %}
+                {% endfor %}
+            {% endif %}
+        </li>
     {% empty %}
-        <li>Пока немає користувачів</li>
+        <li>Поки немає користувачів</li>
     {% endfor %}
 </ul>
+<p><a href="{% url 'create_user' %}">➕ Створити користувача</a></p>

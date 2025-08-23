@@ -5,6 +5,7 @@ from django.http import HttpResponse
 from .forms import UserForm, TournamentForm, TeamForm, MatchForm
 from .models import User, Tournament, Team, Match
 
+
 # Create your views here.
 
 def get_users(request):
@@ -15,23 +16,12 @@ def create_user(request):
     if request.method == 'POST':
         form = UserForm(request.POST)
         if form.is_valid():
-            name=form.cleaned_data.get('name'),
-            first_name=form.cleaned_data.get('first_name'),
-            last_name=form.cleaned_data.get('last_name'),
-            email=form.cleaned_data.get('email'),
-            bio=form.cleaned_data.get('bio')
-            team=form.cleaned_data.get('team')
-   
-            user = User(
-                name=name,
-                first_name=first_name,
-                last_name=last_name,
-                email=email,
-                bio=bio
-            )
-            user.team.set(team)
-            user.save()
+            form.save() 
             return redirect('get_users')
+    else:
+        form = UserForm()
+    return render(request, 'user_form.html', {'form': form})
+
         
 def create_tournament(request):
     if request.method == 'POST':
@@ -104,12 +94,17 @@ def get_tournament(request, tournament_id):
     return render(request=request, template_name='tournament.html', context=dict(tournament=tournament))
 
 def home(request):
-    return HttpResponse("""<h1>Вітаємо на головній сторінці TournamentX!</h1>
+    return HttpResponse("""<h1>Вітаємо на головній сторінці TournamentX!</h1>                
                         <p><a href="/users/">Користувачі</a></p>
+                        <p><a href="/users/create/">Створити користувача</a></p>
                         <p><a href="/tournaments/">Турніри</a></p>
                         <p><a href="/teams/">Команди</a></p>
                         <p><a href="/match/create/">Створити матч</a></p>
-                        <p><a href="/matches/">Переглянути матчі</a></p>""")
+                        <p><a href="/matches/">Переглянути матчі</a></p>
+                        <p><a href="/admin/">Адмін-панель</a></p>
+                        <p><a href="/tournaments/create/">Створити турнір</a></p>
+                        <p><a href="/teams/create/">Створити команду</a></p
+                        """)
 
 def create_match(request):
     if request.method == 'POST':
@@ -136,3 +131,4 @@ def list_matches(request):
 def get_matches(request):
     matches = Match.objects.all()
     return render(request=request, template_name='matches.html', context=dict(matches=matches))
+

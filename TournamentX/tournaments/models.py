@@ -3,12 +3,10 @@ from django.contrib.auth.models import AbstractUser
 
 
 class User(AbstractUser):
-    email = models.EmailField(unique=True)
-    is_admin = models.BooleanField(default=False)
     bio = models.TextField(blank=True, null=True)
 
     def __str__(self):
-        return f"{self.username} ({self.email})"
+        return self.username
 
 
 class Tournament(models.Model):

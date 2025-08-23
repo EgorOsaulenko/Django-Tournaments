@@ -1,30 +1,11 @@
 from django import forms
+from django.contrib.auth.forms import UserCreationForm
 from .models import User, Tournament, Team
 
-class UserForm(forms.Form):
-    name = forms.CharField(
-        label='Name',
-        max_length=30,
-        widget=forms.TextInput(attrs={'class': 'form-control'})
-    )
-    first_name = forms.CharField(
-        label='First Name',
-        max_length=30,
-        widget=forms.TextInput(attrs={'class': 'form-control'})
-    )
-    last_name = forms.CharField(
-        label='Last Name',
-        max_length=30,
-        widget=forms.TextInput(attrs={'class': 'form-control'})
-    )
-    email = forms.EmailField(
-        label='Email',
-        widget=forms.EmailInput(attrs={'class': 'form-control'})
-    )
-    bio = forms.CharField(
-        label='Bio',
-        widget=forms.Textarea(attrs={'class': 'form-control'}),
-    )
+class UserForm(UserCreationForm):
+    class Meta:
+        model = User
+        fields = ['username', 'first_name', 'last_name', 'email', 'bio', 'password1', 'password2']
 
 
 class TournamentForm(forms.Form):
